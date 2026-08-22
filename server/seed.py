@@ -1,5 +1,6 @@
 import os
 import sys
+import re
 from datetime import datetime, timedelta
 from werkzeug.security import generate_password_hash
 
@@ -59,16 +60,14 @@ def seed_database():
 
         print('Creating teams...')
         teams_data = [
-            {'name': 'Arsenal', 'shortName': 'ARS', 'country': 'England', 'sport': 'football', 'league': 'Premier League', 'league_id': leagues[0].id, 'logo': 'https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg'},
-            {'name': 'Chelsea', 'shortName': 'CHE', 'country': 'England', 'sport': 'football', 'league': 'Premier League', 'league_id': leagues[0].id, 'logo': 'https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg'},
-            {'name': 'Manchester City', 'shortName': 'MCI', 'country': 'England', 'sport': 'football', 'league': 'Premier League', 'league_id': leagues[0].id, 'logo': 'https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg'},
-            {'name': 'Liverpool', 'shortName': 'LIV', 'country': 'England', 'sport': 'football', 'league': 'Premier League', 'league_id': leagues[0].id, 'logo': 'https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg'},
-            {'name': 'Gor Mahia', 'shortName': 'Gor Mahia', 'country': 'Kenya', 'sport': 'football', 'league': 'Kenya Premier League', 'league_id': leagues[1].id, 'logo': None},
-            {'name': 'AFC Leopards', 'shortName': 'AFC Leop', 'country': 'Kenya', 'sport': 'football', 'league': 'Kenya Premier League', 'league_id': leagues[1].id, 'logo': None},
-            {'name': 'Al Ahly', 'shortName': 'Al Ahly', 'country': 'Egypt', 'sport': 'football', 'league': 'Egyptian Premier League', 'logo': None},
-            {'name': 'TP Mazembe', 'shortName': 'TP Maz', 'country': 'DR Congo', 'sport': 'football', 'league': 'Linafoot', 'logo': None},
-            {'name': 'Real Madrid', 'shortName': 'RMA', 'country': 'Spain', 'sport': 'football', 'league': 'La Liga', 'league_id': leagues[3].id, 'logo': 'https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg'},
-            {'name': 'Barcelona', 'shortName': 'BAR', 'country': 'Spain', 'sport': 'football', 'league': 'La Liga', 'league_id': leagues[3].id, 'logo': 'https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg'},
+            {'name': 'Arsenal', 'short_name': 'ARS', 'country': 'England', 'sport': 'football', 'league': 'Premier League', 'league_id': leagues[0].id, 'logo': 'https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg'},
+            {'name': 'Chelsea', 'short_name': 'CHE', 'country': 'England', 'sport': 'football', 'league': 'Premier League', 'league_id': leagues[0].id, 'logo': 'https://upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg'},
+            {'name': 'Manchester City', 'short_name': 'MCI', 'country': 'England', 'sport': 'football', 'league': 'Premier League', 'league_id': leagues[0].id, 'logo': 'https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg'},
+            {'name': 'Liverpool', 'short_name': 'LIV', 'country': 'England', 'sport': 'football', 'league': 'Premier League', 'league_id': leagues[0].id, 'logo': 'https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg'},
+            {'name': 'Gor Mahia', 'short_name': 'Gor Mahia', 'country': 'Kenya', 'sport': 'football', 'league': 'Kenya Premier League', 'league_id': leagues[1].id, 'logo': None},
+            {'name': 'AFC Leopards', 'short_name': 'AFC Leop', 'country': 'Kenya', 'sport': 'football', 'league': 'Kenya Premier League', 'league_id': leagues[1].id, 'logo': None},
+            {'name': 'Al Ahly', 'short_name': 'Al Ahly', 'country': 'Egypt', 'sport': 'football', 'league': 'Egyptian Premier League', 'logo': None},
+            {'name': 'TP Mazembe', 'short_name': 'TP Maz', 'country': 'DR Congo', 'sport': 'football', 'league': 'Linafoot', 'logo': None},
         ]
 
         teams = []
@@ -83,7 +82,7 @@ def seed_database():
         matches_data = [
             {'home_team_id': teams[0].id, 'away_team_id': teams[1].id, 'league_id': leagues[0].id, 'start_time': now + timedelta(hours=2), 'status': 'upcoming', 'venue': 'Emirates Stadium', 'sport': 'football'},
             {'home_team_id': teams[2].id, 'away_team_id': teams[3].id, 'league_id': leagues[0].id, 'start_time': now + timedelta(hours=4), 'status': 'upcoming', 'venue': 'Etihad Stadium', 'sport': 'football'},
-            {'home_team_id': teams[8].id, 'away_team_id': teams[9].id, 'league_id': leagues[3].id, 'start_time': now + timedelta(days=1), 'status': 'upcoming', 'venue': 'Santiago Bernabéu', 'sport': 'football'},
+            {'home_team_id': teams[0].id, 'away_team_id': teams[2].id, 'league_id': leagues[3].id, 'start_time': now + timedelta(days=1), 'status': 'upcoming', 'venue': 'Santiago Bernabéu', 'sport': 'football'},
             {'home_team_id': teams[4].id, 'away_team_id': teams[5].id, 'league_id': leagues[1].id, 'start_time': now + timedelta(hours=1), 'status': 'upcoming', 'venue': 'Kasarani Stadium', 'sport': 'football'},
             {'home_team_id': teams[0].id, 'away_team_id': teams[2].id, 'league_id': leagues[0].id, 'start_time': now - timedelta(days=1), 'status': 'finished', 'home_score': 2, 'away_score': 1, 'venue': 'Emirates Stadium', 'sport': 'football'},
             {'home_team_id': teams[1].id, 'away_team_id': teams[3].id, 'league_id': leagues[0].id, 'start_time': now - timedelta(days=2), 'status': 'finished', 'home_score': 0, 'away_score': 0, 'venue': 'Stamford Bridge', 'sport': 'football'},
@@ -156,7 +155,8 @@ def seed_database():
         ]
 
         for n_data in news_data:
-            slug = n_data['title'].lower().replace(/[^\w\s-]/ '', '').replace(/\s+/g, '-').strip('-')
+            slug = re.sub(r'[^\w\s-]', '', n_data['title'].lower())
+            slug = re.sub(r'[\s_]+', '-', slug).strip('-')
             slug = f"{slug}-{datetime.utcnow().strftime('%Y%m%d%H%M%S')}"
             article = News(slug=slug, **n_data)
             db.session.add(article)

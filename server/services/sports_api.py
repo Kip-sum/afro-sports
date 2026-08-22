@@ -3,13 +3,9 @@ from flask import current_app
 
 
 class SportmonksService:
-    def __init__(self):
-        self.api_key = None
-        self.base_url = None
-
     def _get_headers(self):
         return {
-            'Authorization': self.api_key or current_app.config['SPORTMONKS_API_KEY'],
+            'Authorization': current_app.config.get('SPORTMONKS_API_KEY', ''),
         }
 
     def _get_params(self, extra=None):
@@ -17,10 +13,6 @@ class SportmonksService:
         if extra:
             params.update(extra)
         return params
-
-    @property
-    def api_key(self):
-        return current_app.config.get('SPORTMONKS_API_KEY', '')
 
     @property
     def base_url(self):

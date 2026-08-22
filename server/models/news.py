@@ -11,7 +11,7 @@ class News(db.Model):
     content = db.Column(db.Text, nullable=False)
     excerpt = db.Column(db.Text)
     image = db.Column(db.String(500))
-    category = db.String(100))
+    category = db.Column(db.String(100))
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     published = db.Column(db.Boolean, default=False)
     is_featured = db.Column(db.Boolean, default=False)
