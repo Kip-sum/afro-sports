@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --text: #2d2d2d;
+    --text-h: #0a0a0a;
+    --bg: #ffffff;
+    --border: #e5e5e5;
+    --accent: #0f7b3f;
+    --accent-light: #d1fae5;
+    --gold: #d9a31a;
+    --gold-light: #fef3c7;
+  }
+
+  [data-theme='dark'] {
+    --text: #e5e7eb;
+    --text-h: #f9fafb;
+    --bg: #0f1117;
+    --border: #2e303a;
+    --accent-light: #064e31;
+    --gold-light: #784a0a;
+  }
+
+  * {
+    box-sizing: border-box;
+    border-color: inherit;
+    border-width: 0;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 700;
+    color: var(--text-h);
+  }
+
+  a {
+    color: var(--accent);
+    transition: color 0.15s ease;
+  }
+  a:hover {
+    color: var(--primary-dark, #0a5a2d);
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  button {
+    font-family: inherit;
+  }
+}
