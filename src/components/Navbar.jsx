@@ -25,7 +25,7 @@ const Navbar = () => {
     <nav className="bg-primary text-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="text-xl font-bold">
+          <Link to="/" className="text-xl font-bold tracking-wide">
             AFRO SPORTS
           </Link>
 
@@ -35,7 +35,7 @@ const Navbar = () => {
                 key={to}
                 to={to}
                 className={({ isActive }) =>
-                  `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  `px-3 py-2 rounded-md text-sm font-medium ${
                     isActive
                       ? 'bg-gold text-secondary'
                       : 'hover:bg-primary-dark text-gray-200'
@@ -50,7 +50,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-2">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-md hover:bg-primary-dark transition-colors"
+              className="p-2 rounded-md hover:bg-primary-dark"
               aria-label="Toggle theme"
             >
               {theme === 'light' ? '🌙' : '☀️'}
@@ -58,7 +58,7 @@ const Navbar = () => {
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 rounded-md hover:bg-primary-dark transition-colors"
+              className="md:hidden p-2 rounded-md hover:bg-primary-dark"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -74,7 +74,7 @@ const Navbar = () => {
                 to={to}
                 onClick={() => setMobileOpen(false)}
                 className={({ isActive }) =>
-                  `block px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  `block px-3 py-2 rounded-md text-sm font-medium ${
                     isActive
                       ? 'bg-gold text-secondary'
                       : 'hover:bg-primary-dark text-gray-200'
