@@ -49,7 +49,6 @@
 
   a {
     color: var(--accent);
-    transition: color 0.15s ease;
   }
   a:hover {
     color: var(--primary-dark, #0a5a2d);
