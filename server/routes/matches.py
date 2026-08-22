@@ -85,21 +85,42 @@ def get_team_matches(team_id):
     return jsonify({'matches': [m.to_dict() for m in matches]})
 
 
+def _get_venue_name(item):
+    venue = item.get('venue')
+    if isinstance(venue, str):
+        return venue
+    if isinstance(venue, dict):
+        return venue.get('name')
+    return None
+
+
 def _transform_livescores(raw_matches):
     matches = []
     for item in raw_matches:
+        participants = item.get('participants', [])
+        if participants:
+            home_team = _extract_participant(item, 'home')
+            away_team = _extract_participant(item, 'away')
+            home_score = _extract_score(item, 'home')
+            away_score = _extract_score(item, 'away')
+        else:
+            home_team = item.get('homeTeam', {'name': 'Unknown', 'shortName': 'TBD', 'logo': None})
+            away_team = item.get('awayTeam', {'name': 'Unknown', 'shortName': 'TBD', 'logo': None})
+            home_score = item.get('homeScore', 0)
+            away_score = item.get('awayScore', 0)
+
         match = {
             'id': item.get('id'),
             'external_id': str(item.get('id')),
-            'homeTeam': _extract_participant(item, 'home'),
-            'awayTeam': _extract_participant(item, 'away'),
+            'homeTeam': home_team,
+            'awayTeam': away_team,
             'league': _extract_league(item),
             'startTime': item.get('starting_at'),
             'status': 'live',
-            'homeScore': _extract_score(item, 'home'),
-            'awayScore': _extract_score(item, 'away'),
+            'homeScore': home_score,
+            'awayScore': away_score,
             'minute': item.get('minute', ''),
-            'venue': item.get('venue', {}).get('name') if item.get('venue') else None,
+            'venue': _get_venue_name(item),
             'sport': 'football',
         }
         matches.append(match)
@@ -120,7 +141,7 @@ def _transform_fixtures(raw_matches):
             'homeScore': _extract_score(item, 'home'),
             'awayScore': _extract_score(item, 'away'),
             'minute': item.get('minute', ''),
-            'venue': item.get('venue', {}).get('name') if item.get('venue') else None,
+            'venue': _get_venue_name(item),
             'sport': 'football',
         }
         matches.append(match)
@@ -131,23 +152,29 @@ def _extract_participant(item, side):
     participants = item.get('participants', [])
     for p in participants:
         if p.get('meta', {}).get('location') == side:
+            country = p.get('country')
+            country_name = country if isinstance(country, str) else (country.get('name') if isinstance(country, dict) else None)
             return {
                 'id': p.get('id'),
                 'name': p.get('name', ''),
                 'shortName': p.get('short_name', p.get('name', '')),
                 'logo': p.get('image_path', ''),
-                'country': p.get('country', {}).get('name') if p.get('country') else None,
+                'country': country_name,
             }
     return {'name': 'Unknown', 'shortName': 'TBD', 'logo': None}
 
 
 def _extract_league(item):
     league = item.get('league', {})
+    if isinstance(league, str):
+        league = {'name': league}
+    country = league.get('country')
+    country_name = country if isinstance(country, str) else (country.get('name') if isinstance(country, dict) else None)
     return {
         'id': league.get('id'),
         'name': league.get('name', ''),
         'logo': league.get('image_path', ''),
-        'country': league.get('country', {}).get('name') if league.get('country') else None,
+        'country': country_name,
     }
 
 
