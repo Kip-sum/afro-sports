@@ -4,11 +4,13 @@ const teamService = {
   getAllTeams: async (params = {}) => {
     const query = new URLSearchParams(params).toString()
     const endpoint = query ? `/teams?${query}` : '/teams'
-    return apiRequest(endpoint)
+    const data = await apiRequest(endpoint)
+    return data.teams || []
   },
 
   getTeamById: async (id) => {
-    return apiRequest(`/teams/${id}`)
+    const data = await apiRequest(`/teams/${id}`)
+    return data.team || data
   },
 
   getTeamsByLeague: async (leagueId, params = {}) => {
@@ -16,11 +18,13 @@ const teamService = {
     const endpoint = query
       ? `/teams/league/${leagueId}?${query}`
       : `/teams/league/${leagueId}`
-    return apiRequest(endpoint)
+    const data = await apiRequest(endpoint)
+    return data.teams || []
   },
 
   getPlayers: async (teamId) => {
-    return apiRequest(`/teams/${teamId}/players`)
+    const data = await apiRequest(`/teams/${teamId}/players`)
+    return data.players || []
   },
 }
 

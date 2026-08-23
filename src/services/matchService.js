@@ -2,29 +2,35 @@ import { apiRequest } from './api'
 
 const matchService = {
   getLiveScores: async () => {
-    return apiRequest('/live')
+    const data = await apiRequest('/live')
+    return data.liveScores || []
   },
 
   getMatches: async (params = {}) => {
     const query = new URLSearchParams(params).toString()
     const endpoint = query ? `/matches?${query}` : '/matches'
-    return apiRequest(endpoint)
+    const data = await apiRequest(endpoint)
+    return data.matches || []
   },
 
   getMatchById: async (id) => {
-    return apiRequest(`/matches/${id}`)
+    const data = await apiRequest(`/matches/${id}`)
+    return data.match || data
   },
 
   getTodayMatches: async () => {
-    return apiRequest('/matches/today')
+    const data = await apiRequest('/matches/today')
+    return data.matches || []
   },
 
   getUpcomingMatches: async () => {
-    return apiRequest('/matches/upcoming')
+    const data = await apiRequest('/matches/upcoming')
+    return data.matches || []
   },
 
   getRecentMatches: async () => {
-    return apiRequest('/matches/recent')
+    const data = await apiRequest('/matches/recent')
+    return data.matches || []
   },
 
   getMatchesByTeam: async (teamId, params = {}) => {
@@ -32,7 +38,8 @@ const matchService = {
     const endpoint = query
       ? `/matches/team/${teamId}?${query}`
       : `/matches/team/${teamId}`
-    return apiRequest(endpoint)
+    const data = await apiRequest(endpoint)
+    return data.matches || []
   },
 }
 
