@@ -14,13 +14,11 @@ const heroImage = 'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?
 const footballImage = 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80'
 const basketballImage = 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&q=80'
 const athleticsImage = 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80'
-const rugbyImage = 'https://images.unsplash.com/photo-1608245449230-4ac19066d2d0?w=800&q=80'
 
 const sportImages = {
   football: footballImage,
   basketball: basketballImage,
   athletics: athleticsImage,
-  rugby: rugbyImage,
 }
 
 const Home = () => {
@@ -186,12 +184,18 @@ const Home = () => {
               to={sport.to}
               className="relative h-48 rounded-xl overflow-hidden shadow-md group"
             >
-              <img
-                src={sportImages[sport.key]}
-                alt={sport.name}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                onError={(e) => { e.target.src = footballImage }}
-              />
+              {sport.key === 'rugby' ? (
+                <div className="absolute inset-0 bg-gradient-to-br from-green-800 to-green-600 flex items-center justify-center">
+                  <span className="text-8xl">🏉</span>
+                </div>
+              ) : (
+                <img
+                  src={sportImages[sport.key]}
+                  alt={sport.name}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  onError={(e) => { e.target.src = footballImage }}
+                />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent group-hover:from-primary/80 transition-colors" />
               <div className="relative z-10 h-full flex items-end p-4">
                 <span className="text-white font-bold text-lg">{sport.name}</span>
