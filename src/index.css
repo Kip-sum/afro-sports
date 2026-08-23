@@ -32,7 +32,7 @@
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Lucida Console', Geneva, Verdana, sans-serif;
+    font-family: 'Z003', sans-serif;
     line-height: 1.6;
   }
 
@@ -42,7 +42,7 @@
   h4,
   h5,
   h6 {
-    font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Lucida Console', Geneva, Verdana, sans-serif;
+    font-family: 'Z003', sans-serif;
     font-weight: 700;
     color: var(--text-h);
   }
