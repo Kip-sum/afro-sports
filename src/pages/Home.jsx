@@ -14,7 +14,7 @@ const heroImage = 'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?
 const footballImage = 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80'
 const basketballImage = 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800&q=80'
 const athleticsImage = 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80'
-const rugbyImage = 'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800&q=80'
+const rugbyImage = 'https://images.unsplash.com/photo-1608245449230-4ac19066d2d0?w=800&q=80'
 
 const sportImages = {
   football: footballImage,
