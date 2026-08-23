@@ -11,8 +11,8 @@ export default {
         secondary: '#2c3e50',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        heading: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Lucida Console', 'Geneva', 'Verdana', 'sans-serif'],
+        heading: ['Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Lucida Console', 'Geneva', 'Verdana', 'sans-serif'],
       },
     },
   },
