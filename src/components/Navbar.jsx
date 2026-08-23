@@ -43,7 +43,7 @@ const Navbar = () => {
               <path d="M14 18C16 12 20 9 25 9" stroke="#0f7b3f" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
               <path d="M36 18C34 12 30 9 25 9" stroke="#0f7b3f" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
             </svg>
-            <span className="text-xl font-bold tracking-wide text-white">AFRO SPORTS</span>
+            <span className="text-xl font-bold tracking-wide text-white" style={{ fontFamily: "'Z003', cursive" }}>AFRO SPORTS</span>
           </Link>
 
           <div className="hidden md:flex items-center space-x-1">
@@ -58,6 +58,7 @@ const Navbar = () => {
                       : 'hover:bg-primary-dark text-gray-200'
                   }`
                 }
+                style={{ fontFamily: "'Z003', cursive" }}
               >
                 {name}
               </NavLink>
@@ -97,6 +98,7 @@ const Navbar = () => {
                       : 'hover:bg-primary-dark text-gray-200'
                   }`
                 }
+                style={{ fontFamily: "'Z003', cursive" }}
               >
                 {name}
               </NavLink>

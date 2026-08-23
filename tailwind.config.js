@@ -11,8 +11,8 @@ export default {
         secondary: '#2c3e50',
       },
       fontFamily: {
-        sans: ['Z003', 'sans-serif'],
-        heading: ['Z003', 'sans-serif'],
+        sans: ['system-ui', '-apple-system', 'sans-serif'],
+        heading: ['system-ui', '-apple-system', 'sans-serif'],
       },
     },
   },
